@@ -1,0 +1,105 @@
+# openenv.yaml — InvoiceAgentEnv manifest
+# Required by the OpenEnv spec for environment discovery and deployment.
+
+name: invoice-agent-env
+version: "1.0.0"
+description: >
+  A real-world OpenEnv environment where AI agents learn to process business invoices.
+  Tasks range from basic data extraction (easy) to validation error detection (medium)
+  to fraud anomaly flagging and department routing (hard).
+
+author: "Your Name / Team Name"
+license: MIT
+
+# Hugging Face Space where this env is deployed
+space_id: "your-hf-username/invoice-agent-env"
+
+# Docker image (built from Dockerfile in root)
+docker:
+  port: 7860
+
+# OpenEnv API specification
+api:
+  reset_endpoint: /reset
+  step_endpoint: /step
+  state_endpoint: /state
+  health_endpoint: /health
+
+# Tasks this environment supports
+tasks:
+  - id: extraction
+    level: easy
+    description: >
+      Extract structured fields from a clean, well-formatted invoice.
+      Fields: vendor_name, invoice_number, invoice_date, due_date,
+      subtotal, tax_amount, total_amount, currency.
+    score_range: [0.0, 1.0]
+    max_steps: 5
+
+  - id: validation
+    level: medium
+    description: >
+      Extract all fields AND validate the invoice for errors:
+      incorrect totals, due dates before invoice dates, quantity mismatches.
+      Set is_valid and provide validation_notes.
+    score_range: [0.0, 1.0]
+    max_steps: 5
+
+  - id: anomaly_routing
+    level: hard
+    description: >
+      Full pipeline: extract, validate, detect fraud/anomaly signals
+      (offshore banks, urgency pressure, duplicate invoices, missing tax IDs),
+      and route to the correct department (finance/legal/engineering/hr).
+    score_range: [0.0, 1.0]
+    max_steps: 5
+
+# Action schema
+action:
+  type: InvoiceAction
+  fields:
+    vendor_name: str
+    invoice_number: str
+    invoice_date: str          # YYYY-MM-DD
+    due_date: str              # YYYY-MM-DD
+    line_items: list[dict]
+    subtotal: float
+    tax_amount: float
+    total_amount: float
+    currency: str              # ISO 4217
+    is_valid: bool
+    validation_notes: str
+    anomaly_flags: list[str]
+    routing_department: str    # finance | legal | engineering | hr | auto_pay
+    confidence: float          # 0.0 – 1.0
+
+# Observation schema
+observation:
+  type: InvoiceObservation
+  fields:
+    invoice_text: str
+    task_level: str
+    step_feedback: str
+    partial_scores: dict
+    current_reward: float
+    episode_done: bool
+    hints: list[str]
+
+# Reward
+reward:
+  range: [0.0, 1.0]
+  partial_credit: true
+  description: >
+    Weighted sum of per-field accuracy scores. Monetary fields (total_amount,
+    subtotal) carry higher weight. Anomaly detection uses flag overlap scoring.
+    Routing correctness contributes 20% on medium/hard tasks.
+
+# Baseline
+baseline:
+  agent: RuleBasedAgent
+  script: baseline_inference.py
+  scores:
+    easy: 0.62
+    medium: 0.48
+    hard: 0.31
+    overall: 0.47

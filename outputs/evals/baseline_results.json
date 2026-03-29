@@ -1,0 +1,30 @@
+{
+  "agent": "RuleBasedAgent",
+  "results": [
+    {
+      "task_level": "easy",
+      "score": 0.8
+    },
+    {
+      "task_level": "easy",
+      "score": 0.9136
+    },
+    {
+      "task_level": "medium",
+      "score": 0.918
+    },
+    {
+      "task_level": "medium",
+      "score": 0.5546
+    },
+    {
+      "task_level": "hard",
+      "score": 0.6014
+    },
+    {
+      "task_level": "hard",
+      "score": 0.53
+    }
+  ],
+  "overall_avg": 0.7196000000000001
+}
