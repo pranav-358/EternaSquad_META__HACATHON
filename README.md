@@ -1,3 +1,13 @@
+---
+title: InvoiceAgentEnv
+emoji: 🧾
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+license: mit
+---
+
 # InvoiceAgentEnv 🧾
 
 > **Meta PyTorch OpenEnv Hackathon** — Round 1 Submission  

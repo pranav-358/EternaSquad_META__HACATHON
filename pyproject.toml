@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "invoice-agent-env"
+version = "1.0.0"
+description = "OpenEnv-compatible real-world invoice processing environment for RL training"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+    "httpx>=0.25.0",
+    "python-multipart>=0.0.6",
+]
