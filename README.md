@@ -277,7 +277,7 @@ invoice_agent_env/
 ## Deployment
 
 This environment is deployed on Hugging Face Spaces:  
-**[https://huggingface.co/spaces/your-username/invoice-agent-env](https://huggingface.co/spaces/your-username/invoice-agent-env)**
+**[https://huggingface.co/spaces/pranav358it/invoice-agent-env](https://huggingface.co/spaces/pranav358it/invoice-agent-env)**
 
 ```bash
 # Deploy with OpenEnv CLI
