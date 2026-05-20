@@ -31,9 +31,6 @@ The agent reads raw invoice text and must:
 - **Detect anomalies** — fraud signals, duplicates, suspicious patterns
 - **Route** the invoice to the correct department for approval
 
-This mirrors exactly what finance teams at companies like Meta, Infosys, and
-thousands of enterprises spend enormous time doing manually.
-
 ---
 
 ## Environment Description
@@ -165,7 +162,7 @@ agent is never stuck at 0 for getting half the fields right.
 ### Local Development
 
 ```bash
-git clone https://github.com/your-username/invoice-agent-env
+git clone https://github.com/pranav-358/invoice-agent-env
 cd invoice-agent-env
 
 pip install -e .
